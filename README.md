@@ -51,11 +51,7 @@ To set up locally:
 
 2. Installing requirements:
     ```bash
-   cd black-Friday
-
    python -m venv your-venv-name
-
-   cd your-venv-name
 
    your-venv-name/Scripts/activate
    
@@ -69,6 +65,7 @@ To set up locally:
    python model.py
    ```
 
+   2. To run web app use this code
    ```bash
    python app.py
    ```
