@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('model_pred.static', filename='css/model_prediction.css') }}">
+    <title>{% block title %}Model Prediction{% endblock %}</title>
+    <script src = "{{ url_for('model_pred.static', filename='js/app.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('auth.static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="/predict"><i class="fa-solid fa-crosshairs"></i>Predict</a>
+            <a href="/graphs"><i class="fa-solid fa-chart-line"></i>Graphs</a>
+            <a href="/about"><i class="fa-solid fa-circle-info"></i>About</a>
+            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <form id="prediction-form" method="POST" action="{{ url_for('model_pred.predict') }}">
+            <div class="container-1">
+                <div class="age-container">
+                    <label for="age">Age <span class="required">*</span></label>
+                    <select id="age" name="age" required>
+                        <option value="" disabled selected>Select Age Group</option>
+                        <option value="0">0-17</option>
+                        <option value="1">18-25</option>
+                        <option value="2">26-35</option>
+                        <option value="3">36-45</option>
+                        <option value="4">46-50</option>
+                        <option value="5">51-55</option>
+                        <option value="6">55+</option>
+                    </select>
+                </div>
+        
+                <div class="city-container">
+                    <label for="city">City Category <span class="required">*</span></label>
+                    <select id="city" name="city" required>
+                        <option value="" disabled selected>Select City Category</option>
+                        <option value="0">City A</option>
+                        <option value="1">City B</option>
+                        <option value="2">City C</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="stay_years">
+                <label for="stay_years">Stay In Current City (Years) <span class="required">*</span></label>
+                <select id="stay_years" name="stay_years" required>
+                    <option value="" disabled selected>Select Years</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+    
+            <div class="pc1">
+                <label for="product_category_1">Product Category 1 <span class="required">*</span></label>
+                <input type="number" id="product_category_1" name="product_category_1" min="0" required />
+            </div>
+    
+            <div class="pc2">
+                <label for="product_category_2">Product Category 2 <span class="required">*</span></label>
+                <input type="number" id="product_category_2" name="product_category_2" min="0" required />
+            </div>
+    
+            <div class="pc3">
+                <label for="product_category_3">Product Category 3 <span class="required">*</span></label>
+                <input type="number" id="product_category_3" name="product_category_3" min="0" required />
+            </div>
+    
+            <button type="submit">Get Prediction</button>
+        </form>
+    
+    
+        <div class="predicted_output">
+            <div id="popup" class="popup-content">
+                <h4>Welcome {{username}} ! This is your model prediction page.</h4>
+            </div>
+
+            <div class="how-it-works">
+                <h2>How It Works:</h2>
+                <ul>
+                    <li><strong>Age:</strong> Select your age group from the options provided.</li>
+                    <li><strong>City Category:</strong> Choose the category that best describes your city (A, B, or C).</li>
+                    <li><strong>Stay in Current City:</strong> Indicate how long you have lived in your current city.</li>
+                    <li><strong>Product Categories:</strong> Input the estimated number of products in each of the three categories.</li>
+                </ul>
+                <p>Once you fill in this information and click "Get Prediction," our model will analyze your data and provide an estimate of your likelihood to make a purchase.</p>
+            </div>
+            
+
+            <div class="results">
+                {% if message %}
+                    <h3>{{ message }}</h3>
+                {% endif %}
+
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-prediction" onchange="updatePrediction()">
+                        <span class="slider"></span>
+                    </label>
+                    <span id="toggle-label">Overall / Scaled</span>
+                </div>
+
+                {% if prediction is not none and category_prediction is not none %}
+                    <div class="total_pred">
+                        <label for="total_pred_val">Overall Prediction for all purchases</label>
+                        <div class="total_pred_val" id="total_pred_val">{{ prediction }}</div>
+                    </div>
+                    <div class="individual_pred">
+                        <div class="pc_1_pred">
+                            <label for="pc_1_pred_val">Category 1</label>
+                            <div class="pc_1_pred_val" id="pc_1_pred_val">{{ category_prediction[0] }}</div>
+                        </div>
+                        <div class="pc_2_pred">
+                            <label for="pc_2_pred_val">Category 2</label>
+                            <div class="pc_2_pred_val" id="pc_2_pred_val">{{ category_prediction[1] }}</div>
+                        </div>
+                        <div class="pc_3_pred">
+                            <label for="pc_3_pred_val">Category 3</label>
+                            <div class="pc_3_pred_val" id="pc_3_pred_val">{{ category_prediction[2] }}</div>
+                        </div>
+                    </div>
+                    <p>* Individual prediction for each product categories</p>
+                    <div class="voucher">
+                        {{ personalized_vouchers }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updatePrediction() {
+            var toggle = document.getElementById('toggle-prediction');
+            var label = document.getElementById('toggle-label');
+    
+            var categoryPrediction = [
+                {{ category_prediction[0] }},
+                {{ category_prediction[1] }},
+                {{ category_prediction[2] }}
+            ];
+    
+            console.log('Category Predictions:', categoryPrediction); // Debug line
+    
+            let scaledCategoryPrediction;
+            if (toggle.checked) {
+                scaledCategoryPrediction = [
+                    (categoryPrediction[0] * 0.014178767335592892).toFixed(2),
+                    (categoryPrediction[1] * 0.02034937249960038).toFixed(2),
+                    (categoryPrediction[2] * 0.04477253719560625).toFixed(2)
+                ];
+                var scaledPrediction = scaledCategoryPrediction.reduce((a, b) => a + parseFloat(b), 0).toFixed(2);
+                document.getElementById('total_pred_val').innerText = scaledPrediction;
+                document.getElementById('pc_1_pred_val').innerText = scaledCategoryPrediction[0];
+                document.getElementById('pc_2_pred_val').innerText = scaledCategoryPrediction[1];
+                document.getElementById('pc_3_pred_val').innerText = scaledCategoryPrediction[2];
+            } else {
+                document.getElementById('total_pred_val').innerText = '{{ prediction }}';
+                document.getElementById('pc_1_pred_val').innerText = '{{ category_prediction[0] }}';
+                document.getElementById('pc_2_pred_val').innerText = '{{ category_prediction[1] }}';
+                document.getElementById('pc_3_pred_val').innerText = '{{ category_prediction[2] }}';
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

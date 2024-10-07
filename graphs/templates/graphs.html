@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('graphs_display.static', filename='css/graphs.css') }}">
+    <title>{% block title %}Graphs{% endblock %}</title>
+    <script src = "{{ url_for('graphs_display.static', filename='js/app.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('auth.static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="/predict"><i class="fa-solid fa-crosshairs"></i>Predict</a>
+            <a href="/graphs"><i class="fa-solid fa-chart-line"></i>Graphs</a>
+            <a href="/about"><i class="fa-solid fa-circle-info"></i>About</a>
+            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </div>
+    </nav>
+    
+    <div class="graph-display-container">
+        <div class="choose-graph">
+            <h2>Select a Graph</h2>
+            <select id="graphSelector" onchange="showGraph()">
+                <option value="">--Select a graph--</option>
+                <option value="max_spend_per_cat">Max spend in different category</option>
+                <option value="total_spend_by_category">Total Spend per Category</option>
+                <option value="cutomer_segmentation_wrt_purchase">Customer Segmentation wrt Purchase</option>
+                <option value="discount_percentage_wrt_purchase">Discount Precentage vs. Purchase</option>
+                <option value="bp_purchase">Box Plot for Purchase</option>
+                <option value="tot_max_pc1">Total & Maximum Purchase for Category-1</option>
+                <option value="tot_max_pc2">Total & Maximum Purchase for Category-2</option>
+                <option value="tot_max_pc3">Total & Maximum Purchase for Category-3</option>
+                <option value="heat_corr">Correlation Heatmap</option>
+
+            </select>
+        </div>
+
+        <div class="image-container">
+            <img id="graphImage" src="graphs/static/images/bar-chart.gif" alt="Graph Image">
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('graphs_display.static', filename='css/about.css') }}">
+    <title>{% block title %}About{% endblock %}</title>
+    <script src = "{{ url_for('graphs_display.static', filename='js/app.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('auth.static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="/predict"><i class="fa-solid fa-crosshairs"></i>Predict</a>
+            <a href="/graphs"><i class="fa-solid fa-chart-line"></i>Graphs</a>
+            <a href="/about"><i class="fa-solid fa-circle-info"></i>About</a>
+            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </div>
+    </nav>
+    
+    <div class="content">
+        <h1>About the Machine Learning Model</h1>
+        <p>In this project, we performed extensive data preprocessing, feature engineering, and built machine learning models to predict user purchase behavior. Here are the detailed steps we followed while we built this application.</p>
+        <ul>
+            <li class="sub-points">
+                <strong>Data Import and Initial Exploration:</strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Imported necessary libraries such as <code>numpy</code>, <code>pandas</code>, and <code>warnings</code>.</li>
+                    <li>Loaded two datasets: <code>user_demographics.csv</code> and <code>User_product_purchase_details_p2.csv</code>.</li>
+                    <li>Explored the datasets to understand their structure and contents.</li>
+                </ul>
+            </li>
+            <li class="sub-points">
+                <strong>Data Cleaning and Merging:</strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Merged the two datasets on <code>User_ID</code> to create a comprehensive dataset.</li>
+                    <li>Handled missing values and encoded categorical variables using <code>LabelEncoder</code>.</li>
+                    <li>Removed outliers based on the Interquartile Range (IQR) method to ensure data quality.</li>
+                </ul>
+            </li>
+            <li class="sub-points">
+                <strong>Feature Engineering:</strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Aggregated purchase details by <code>User_ID</code> to create new features such as total purchase amount and product category sums.</li>
+                    <li>Transformed categorical features like <code>Gender</code>, <code>Age</code>, and <code>City_Category</code> into numerical values for model compatibility.</li>
+                </ul>
+            </li>
+            <li class="sub-points">
+                <strong>Model Building and Evaluation:</strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Split the data into training and testing sets using <code>train_test_split</code>.</li>
+                    <li>Built two regression models: Decision Tree Regressor and Random Forest Regressor.</li>
+                    <li>Evaluated the models using metrics such as Mean Squared Error (MSE), R² score, and Mean Absolute Error (MAE).</li>
+                    <li>The Random Forest model outperformed the Decision Tree model with a higher R² score and lower MSE.</li>
+                </ul>
+            </li>
+            <li class="sub-points">
+                <strong>Model Predictions:</strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Used the trained models to make predictions on the test set.</li>
+                    <li>Demonstrated the prediction capability of the models with sample inputs.</li>
+                </ul>
+            </li>
+            <li class="sub-points">
+                <strong>Statistical Analysis (Numerical + Categorical): </strong>
+                <span class="read-more" onclick="toggleContent(this)">Read More . . .</span>
+                <ul class="details">
+                    <li>Most Purchased Product P00265242 - was bought 1,880 times.</li>
+                    <li>Category B has the highest frequency, with 231,173 purchases</li>
+                    <li>The most frequent Stay in currect city is 1 year, with 193,821 users- indicates that a large number of customers
+                        are relatively new to their cities</li>
+                    <li>Strong male-dominated customer base - 414,259 or 75% of the total</li>
+                    <li>Majority of the customers fall into the young adult demographic - 26-35 age range, 219,587 users - 40% of Total</li>
+                    <li>Most customers spend between ₹5,823 and ₹12,054, based on the IQR</li>
+                </ul>
+            </li>
+        </ul>
+        <p>This model helps in predicting user purchase behavior based on various features such as age, city category, and product categories.</p>
+    </div>
+
+    <div class="download-section">
+        <h2>Download Options</h2>
+        <p>Select a format to download the file:</p>
+        <div class="download-btn">
+            <a href="graphs/static/files/Black_Friday.pdf" download>
+                <button>Download as PDF</button>
+            </a>
+            <a href="graphs/static/files/Black_Friday.md" download>
+                <button>Download as Markdown</button>
+            </a>
+            <a href="graphs/static/files/Black_Friday.html" download>
+                <button>Download as HTML</button>
+            </a>
+            <a href="graphs/static/files/Black_Friday.ipynb" download>
+                <button>Download as Jupyter Notebook (.ipynb)</button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

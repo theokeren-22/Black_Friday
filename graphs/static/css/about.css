@@ -1,0 +1,158 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
+    background-color: #151515;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo img{
+    width: 150px;
+    filter: invert(1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: width .3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    transition: width .3s;
+}
+
+.nav-links a i{
+    padding-right: 5px;
+}
+
+.content{
+    margin: 20px 40px;
+    line-height: 200%;
+}
+.content h1{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.content p, ul {
+    font-size: 18px;
+}
+
+.content ul {
+    margin-left: 25px;
+}
+
+.content ul .sub-points{
+    margin: 20px 0;
+}
+
+.details {
+    display: none; /* Hide the details by default */
+}
+
+.read-more {
+    cursor: pointer;
+    color: #6bacc2;
+    /* text-decoration: underline; */
+}
+
+.download-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 0 150px;
+    border-radius: 5px;
+}
+
+.download-section h2 {
+    margin: 0;
+}
+
+.download-section .download-btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 0;
+}
+
+.download-section a{
+    text-decoration: none;
+}
+
+.download-section button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2d6476;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.download-section button:hover {
+    background-color: #427a8d;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #151515;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+    border: 3px solid #151515;
+}

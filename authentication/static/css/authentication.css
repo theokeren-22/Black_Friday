@@ -1,0 +1,183 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+    
+    background-color: #151515;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo img{
+    width: 150px;
+    filter: invert(1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: width .3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    transition: width .3s;
+}
+
+.content{
+    height: 85svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.hero-img{
+    filter: grayscale(1);
+    /* mix-blend-mode: multiply; */
+    /* filter: invert(1); */
+}
+
+.hero-img img{
+    /* filter: invert(1); */
+    width: 600px;
+}
+
+
+
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    width: 100%;
+    background-color: transparent;
+    padding: 40px;
+    border-radius: 12px;
+    border: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    h1{
+        color: #fff;
+        margin: 0 0 30px 0;
+    }
+
+    .image img {
+        width: 100px;
+        height: 100px;
+        margin: 10px 0 30px 0;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 14px;
+
+            input, select {
+                padding: 16px;
+                border: none;
+                border-radius: 5px;
+                transition: border-color 0.3s ease-in-out;
+                outline: none;
+                color: #333;
+                background-color: #f4f4f4;
+                width: calc(100% - 30px);
+                color: #151515;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            input::placeholder {
+                color: #959595;
+            }
+
+            input:focus {
+                border-color: #39778c;
+            }
+        }
+
+        p.message {
+            color: white;
+        }
+
+        button {
+            background-color: #2d6476;
+            color: #fff;
+            padding: 16px 10px;
+            width: 250px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            transition: 1s;
+        }
+
+        button:hover {
+            background-color: #427a8d;
+            transform: scale(1.02);
+            transition: 1s;
+        }
+    }
+}
+.input-group {
+    position: relative; /* Position relative for absolute positioning of the icon */
+}
+
+.input-group i.toggle-password,
+.input-group i.toggle-confirm-password {
+    position: absolute;
+    right: 25px; /* Position to the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for centering */
+    cursor: pointer; /* Pointer cursor for click */
+    color: #333; /* Color of the icon */
+}
+
+.input-group i{
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+}

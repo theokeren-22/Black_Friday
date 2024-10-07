@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+    <div class="hero-img">
+        <img src="{{ url_for('auth.static', filename='images/signup.png') }}" alt="">
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h1>SIGN UP</h1>
+            <form method = "POST" id="passwordForm">
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="E-Mail" required>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye-slash toggle-password" id="tooglePassword" onclick="togglePassword()"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    <i class="fa-solid fa-eye-slash toggle-confirm-password" id="toogleConfirmPassword" onclick="toggleConfirmPassword()"></i>
+                </div>
+
+                <div class="input-group">
+                    <select name="role" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="student">Student</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="developer">Developer</option>
+                        <option value="business_analyst">Business Analyst</option>
+                    </select>
+                </div>
+
+                {% if message %}
+                    <p class="message" id="message">{{ message }}</p>
+                {% else %}
+                    <p class="message" id="message"></p> <!-- Empty paragraph for validation errors -->
+                {% endif %}
+
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

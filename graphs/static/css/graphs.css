@@ -1,0 +1,102 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
+    background-color: #151515;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo img{
+    width: 150px;
+    filter: invert(1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: width .3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    transition: width .3s;
+}
+
+.nav-links a i{
+    padding-right: 5px;
+}
+
+
+
+.graph-display-container{
+    margin: 0.3em 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 88svh;
+    justify-content: space-evenly;
+}
+
+.graph-display-container .choose-graph{
+    width: 400px;
+    align-items: center;
+}
+
+.graph-display-container h1{
+    letter-spacing: 2px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 20px 0;
+}
+select:focus {
+    outline: none;
+}
+#graphImage {
+    display: none;
+    /* margin: 10px; */
+    min-width: 20%;
+    width: 600px; /* Makes the image responsive */
+    /* border: 2px solid #FFFFFF; */
+    border-radius: 10px;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
