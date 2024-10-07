@@ -63,6 +63,12 @@ To set up locally:
    ```
 
 3. Run Python app:
+
+   1. For the first time run the below command to create model.pkl
+   ```bash
+   python model.py
+   ```
+
    ```bash
    python app.py
    ```
